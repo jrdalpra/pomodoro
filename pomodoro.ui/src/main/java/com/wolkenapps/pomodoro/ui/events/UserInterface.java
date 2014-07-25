@@ -19,6 +19,7 @@ public class UserInterface {
 	@RequiredArgsConstructor
 	@Getter
 	public class OpenWindow extends UserInterface.Event {
+		private final Point	where;
 	}
 
 }
