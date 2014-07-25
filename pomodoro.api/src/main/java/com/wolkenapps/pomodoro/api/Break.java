@@ -8,65 +8,64 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class Pomodoro implements Serializable {
+public class Break implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static abstract class Event {
+    public static class Event {
+    }
+
+    public static class AskToTakeALongOne extends Break.Event {
+    }
+
+    public static class AskToTakeAShortOne extends Break.Event {
     }
 
     @RequiredArgsConstructor
     @Getter
-    public static class AskToStart extends Pomodoro.Event {
+    public static class Started extends Break.Event {
+        private final Break who;
     }
 
     @RequiredArgsConstructor
     @Getter
-    public static class Started extends Pomodoro.Event {
-        private final Pomodoro who;
+    public static class Running extends Break.Event {
+        private final Break who;
     }
 
     @RequiredArgsConstructor
     @Getter
-    public static class Running extends Pomodoro.Event {
-        private final Pomodoro who;
+    public static class Finished extends Break.Event {
+        private final Break who;
+    }
+
+    public static class AskToTakeInterrupt extends Break.Event {
     }
 
     @RequiredArgsConstructor
     @Getter
-    public static class Interrupt extends Pomodoro.Event {
+    public static class Interrupted extends Break.Event {
+        private final Break who;
     }
 
-    @RequiredArgsConstructor
-    @Getter
-    public static class Interrupted extends Pomodoro.Event {
-        private final Pomodoro who;
-    }
-
-    @RequiredArgsConstructor
-    @Getter
-    public static class Finished extends Pomodoro.Event {
-        private final Pomodoro who;
-    }
-
-    private final Calendar startWhen;
+    private final Calendar whenStarted;
     private final Integer  totalSecondsToRun;
+
     private Calendar       finishedWhen;
     private Calendar       interruptedWhen;
-
     private Integer        secondsRunning = 0;
 
-    public Pomodoro finished() {
+    public Break finished() {
         finishedWhen = Calendar.getInstance();
         return this;
     }
 
-    public Pomodoro interrupted() {
+    public Break interrupted() {
         interruptedWhen = Calendar.getInstance();
         return this;
     }
 
-    public Pomodoro countASecond() {
+    public Break countASecond() {
         this.secondsRunning = this.secondsRunning + 1;
         return this;
     }
@@ -85,10 +84,6 @@ public class Pomodoro implements Serializable {
 
     public boolean isCompleted() {
         return getTotalRemainingSeconds() <= 0;
-    }
-
-    public boolean isRunning() {
-        return finishedWhen == null && interruptedWhen == null && !isCompleted();
     }
 
 }

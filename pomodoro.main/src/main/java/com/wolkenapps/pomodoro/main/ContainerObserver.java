@@ -8,16 +8,15 @@ import javax.inject.Inject;
 
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
-import com.wolkenapps.pomodoro.api.Execution;
+import com.wolkenapps.pomodoro.api.Application;
 
 public class ContainerObserver {
 
-	@Inject
-	private Event<Execution.Started> executionStarted;
+    @Inject
+    private Event<Application.Started> executionStarted;
 
-	public void started(@Observes ContainerInitialized started) {
-		System.out.println(19);
-		executionStarted.fire(new Execution.Started(Calendar.getInstance()));
-	}
+    public void started(@Observes ContainerInitialized started) {
+        executionStarted.fire(new Application.Started(Calendar.getInstance()));
+    }
 
 }
