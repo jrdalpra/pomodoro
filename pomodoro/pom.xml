@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wolkenapps</groupId>
+	<artifactId>pomodoro</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<!-- properties -->
+		<version.property.javac.source>1.7</version.property.javac.source>
+		<version.property.javac.target>1.7</version.property.javac.target>
+
+		<!-- dependencies -->
+		<version.dep.cdi-api>1.1</version.dep.cdi-api>
+		<version.dep.weld-se>2.2.3.Final</version.dep.weld-se>
+		<version.dep.lombok>1.14.4</version.dep.lombok>
+		
+		<!-- plugins -->
+		<version.plugin.maven-compiler-plugin>3.1</version.plugin.maven-compiler-plugin>
+
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.plugin.maven-compiler-plugin}</version>
+				<configuration>
+					<source>${version.property.javac.source}</source>
+					<target>${version.property.javac.target}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>${version.dep.cdi-api}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${version.dep.lombok}</version>
+		</dependency>
+	</dependencies>
+
+</project>
