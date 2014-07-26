@@ -14,8 +14,7 @@ public class Startup {
 
     public static void main(String[] args) {
         val weld = new Weld("com.wolkenapps.pomorodo");
-        val container = weld.initialize();
-        Runtime.getRuntime().addShutdownHook(new Shutdown(weld, container));
+        Runtime.getRuntime().addShutdownHook(new Shutdown(weld, weld.initialize()));
     }
 
     @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class Startup {
 
         @Override
         public void run() {
-            container.event().fire(new Application.Stopped(Calendar.getInstance()));
+            container.event().fire(new Application.Stopping(Calendar.getInstance()));
             weld.shutdown();
         }
     }

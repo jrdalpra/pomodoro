@@ -34,7 +34,7 @@ public class Pomodoro implements Serializable {
 
     @RequiredArgsConstructor
     @Getter
-    public static class Interrupt extends Pomodoro.Event {
+    public static class AskToInterrupt extends Pomodoro.Event {
     }
 
     @RequiredArgsConstructor
@@ -56,12 +56,12 @@ public class Pomodoro implements Serializable {
 
     private Integer        secondsRunning = 0;
 
-    public Pomodoro finished() {
+    public Pomodoro finish() {
         finishedWhen = Calendar.getInstance();
         return this;
     }
 
-    public Pomodoro interrupted() {
+    public Pomodoro interrupt() {
         interruptedWhen = Calendar.getInstance();
         return this;
     }
